@@ -27,19 +27,19 @@ docker run -d \
   --name rabbitmq \
   -p 5672:5672 \
   -p 15672:15672 \
-  bashell/alpine-rmq
+  bashell/alpine-rmq:latest
 ```
 
 ```bash
 # Run with TLS enabled
-docker run -it \
+docker run -d \
   --name rabbitmq \
   -p 5671:5671 \
   -p 15671:15671 \
   -e SSL_CERT_FILE=/ssl/cert/cert.pem \
   -e SSL_KEY_FILE=/ssl/cert/key.pem \
   -e SSL_CA_FILE=/ssl/CA/cacert.pem \
-  bashell/alpine-rmq
+  bashell/alpine-rmq:latest
 ```
 
 ### Customizing
