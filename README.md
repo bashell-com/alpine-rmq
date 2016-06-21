@@ -44,5 +44,19 @@ docker run -d \
   bashell/alpine-rmq:latest
 ```
 
-### Customizing
+### Setting default user and password ###
+
+If you wish to change the default username and password of `guest` / `guest`, you can do so with the `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` environmental variables:
+
+```bash
+$ docker run -d \
+  --name rabbitmq \
+  -p 5672:5672 \
+  -p 15672:15672 \
+  -e RABBITMQ_DEFAULT_USER=user \
+  -e RABBITMQ_DEFAULT_PASS=password \
+  bashell/alpine-rmq:latest
+```
+
+### Customizing ###
 To set a custom config, ditch the wrapper script and call `rabbitmq-server` directly.  Place the custom config in `/srv/rabbitmq_server-VERSION/etc/rabbitmq/`.

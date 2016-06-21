@@ -56,6 +56,17 @@ ${RABBITMQ_HOME}/sbin/rabbitmq-server &
 # Capture the PID
 rmq_pid=$!
 
+if ! [[ -z ${RABBITMQ_DEFAULT_USER+x} ]]; then
+    if ! [[ -z ${RABBITMQ_DEFAULT_PASS+x} ]]; then
+        while [ "`${RABBITMQ_HOME}/sbin/rabbitmqctl status |grep rabbitmq_management |wc -l`" -ne "2" ]; do
+            sleep 1
+        done
+        ${RABBITMQ_HOME}/sbin/rabbitmqctl delete_user guest
+        ${RABBITMQ_HOME}/sbin/rabbitmqctl add_user ${RABBITMQ_DEFAULT_USER} ${RABBITMQ_DEFAULT_PASS}
+        ${RABBITMQ_HOME}/sbin/rabbitmqctl set_user_tags ${RABBITMQ_DEFAULT_USER} administrator
+    fi
+fi
+
 # Tail the logs, but continue on to the wait command
 echo -e "\n\nTailing log output:"
 tail -F ${RABBITMQ_HOME}/var/log/rabbitmq/rabbit@${HOSTNAME}.log \
