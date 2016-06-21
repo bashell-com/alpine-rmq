@@ -4,9 +4,10 @@ This image provides RabbitMQ based on Alpine Linux latest stable version. All fi
 
 ### Supported tags and respective Dockerfile links ###
 
-- `latest` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/942c4c97656aa985d20071bcb6907172619af8ec/Dockerfile?fileviewer=file-view-default))
-- `3.6.1` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/0460544242770a1b96ed76e86ab95cd4b78e4c5b/Dockerfile?fileviewer=file-view-default))
-- `3.6.0` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/ecb866bc1f39dcc4bc44d7aee2ddd78bf76e8a78/Dockerfile?fileviewer=file-view-default))
+- `latest` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/master/Dockerfile?fileviewer=file-view-default))
+- `3.6.2` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.2/Dockerfile?fileviewer=file-view-default))
+- `3.6.1` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.1/Dockerfile?fileviewer=file-view-default))
+- `3.6.0` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.0/Dockerfile?fileviewer=file-view-default))
 
 ### Usage ###
 
@@ -44,5 +45,21 @@ docker run -d \
   bashell/alpine-rmq:latest
 ```
 
-### Customizing
+### Setting default user and password ###
+
+***(Only for 3.6.2 or newer)***
+
+If you wish to change the default username and password of `guest` / `guest`, you can do so with the `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` environmental variables:
+
+```bash
+$ docker run -d \
+  --name rabbitmq \
+  -p 5672:5672 \
+  -p 15672:15672 \
+  -e RABBITMQ_DEFAULT_USER=user \
+  -e RABBITMQ_DEFAULT_PASS=password \
+  bashell/alpine-rmq:latest
+```
+
+### Customizing ###
 To set a custom config, ditch the wrapper script and call `rabbitmq-server` directly.  Place the custom config in `/srv/rabbitmq_server-VERSION/etc/rabbitmq/`.

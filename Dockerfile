@@ -1,7 +1,7 @@
 FROM bashell/alpine-bash:latest
 MAINTAINER Chaiwat Suttipongsakul <cwt@bashell.com>
 
-ENV RABBITMQ_VERSION=3.6.1
+ENV RABBITMQ_VERSION=3.6.2
 ENV RABBITMQ_HOME=/srv/rabbitmq_server-$RABBITMQ_VERSION
 ENV PLUGINS_DIR=$RABBITMQ_HOME/plugins
 ENV ENABLED_PLUGINS_FILE=$RABBITMQ_HOME/etc/rabbitmq/enabled_plugins
@@ -15,9 +15,7 @@ RUN apk add erlang erlang-mnesia erlang-public-key erlang-crypto \
     erlang-ssl erlang-sasl erlang-asn1 erlang-inets erlang-os-mon \
     erlang-xmerl erlang-eldap erlang-sasl erlang-syntax-tools openssl
 RUN apk add xz && cd /srv && \
-    wget http://www.rabbitmq.com/releases/rabbitmq-server/v$RABBITMQ_VERSION/rabbitmq-server-generic-unix-$RABBITMQ_VERSION.tar.xz && \
-    xz -d -c rabbitmq-server-generic-unix-$RABBITMQ_VERSION.tar.xz | tar -xf - && \
-    rm -f rabbitmq-server-generic-unix-$RABBITMQ_VERSION.tar.xz && \
+    wget -q -O - http://www.rabbitmq.com/releases/rabbitmq-server/v$RABBITMQ_VERSION/rabbitmq-server-generic-unix-$RABBITMQ_VERSION.tar.xz | xz -d - | tar -xf - && \
     touch $RABBITMQ_HOME/etc/rabbitmq/enabled_plugins && \
     $RABBITMQ_HOME/sbin/rabbitmq-plugins enable --offline rabbitmq_management && \
     apk del xz
