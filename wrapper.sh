@@ -64,7 +64,7 @@ if ! [[ -z ${RABBITMQ_DEFAULT_USER+x} ]]; then
         ${RABBITMQ_HOME}/sbin/rabbitmqctl delete_user guest
         ${RABBITMQ_HOME}/sbin/rabbitmqctl add_user ${RABBITMQ_DEFAULT_USER} ${RABBITMQ_DEFAULT_PASS}
         ${RABBITMQ_HOME}/sbin/rabbitmqctl set_user_tags ${RABBITMQ_DEFAULT_USER} administrator
-	${RABBITMQ_HOME}/sbin/rabbitmqctl set_permissions ${RABBITMQ_DEFAULT_USER} -p "/" ".*" ".*" ".*"
+        ${RABBITMQ_HOME}/sbin/rabbitmqctl set_permissions ${RABBITMQ_DEFAULT_USER} -p "/" ".*" ".*" ".*"
     fi
 fi
 
