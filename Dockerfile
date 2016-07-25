@@ -1,7 +1,7 @@
 FROM bashell/alpine-bash:latest
 MAINTAINER Chaiwat Suttipongsakul <cwt@bashell.com>
 
-ENV RABBITMQ_VERSION=3.6.2
+ENV RABBITMQ_VERSION=3.6.3
 ENV RABBITMQ_HOME=/srv/rabbitmq_server-$RABBITMQ_VERSION
 ENV PLUGINS_DIR=$RABBITMQ_HOME/plugins
 ENV ENABLED_PLUGINS_FILE=$RABBITMQ_HOME/etc/rabbitmq/enabled_plugins
