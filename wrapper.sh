@@ -41,11 +41,11 @@ if [[ "${use_ssl}" == "yes" ]]; then
 
     echo "Launching RabbitMQ with SSL..."
     echo -e " - SSL_CERT_FILE: $SSL_CERT_FILE\n - SSL_KEY_FILE: $SSL_KEY_FILE\n - SSL_CA_FILE: $SSL_CA_FILE"
-    mv ${RABBITMQ_HOME}/etc/rabbitmq/ssl.config \
+    cp ${RABBITMQ_HOME}/etc/rabbitmq/ssl.config \
         ${RABBITMQ_HOME}/etc/rabbitmq/rabbitmq.config
 else
     echo "Launching RabbitMQ..."
-    mv ${RABBITMQ_HOME}/etc/rabbitmq/standard.config \
+    cp ${RABBITMQ_HOME}/etc/rabbitmq/standard.config \
         ${RABBITMQ_HOME}/etc/rabbitmq/rabbitmq.config
 fi
 
@@ -58,13 +58,16 @@ rmq_pid=$!
 
 if ! [[ -z ${RABBITMQ_DEFAULT_USER+x} ]]; then
     if ! [[ -z ${RABBITMQ_DEFAULT_PASS+x} ]]; then
-        while [ "`${RABBITMQ_HOME}/sbin/rabbitmqctl status |grep rabbitmq_management |wc -l`" -ne "2" ]; do
-            sleep 1
-        done
-        ${RABBITMQ_HOME}/sbin/rabbitmqctl delete_user guest
-        ${RABBITMQ_HOME}/sbin/rabbitmqctl add_user ${RABBITMQ_DEFAULT_USER} ${RABBITMQ_DEFAULT_PASS}
-        ${RABBITMQ_HOME}/sbin/rabbitmqctl set_user_tags ${RABBITMQ_DEFAULT_USER} administrator
-        ${RABBITMQ_HOME}/sbin/rabbitmqctl set_permissions ${RABBITMQ_DEFAULT_USER} -p "/" ".*" ".*" ".*"
+        if ! [ -f "${RABBITMQ_HOME}/.administrator_exist" ]; then
+            while [ "`${RABBITMQ_HOME}/sbin/rabbitmqctl status |grep rabbitmq_management |wc -l`" -ne "2" ]; do
+                sleep 1
+            done
+            ${RABBITMQ_HOME}/sbin/rabbitmqctl delete_user guest
+            ${RABBITMQ_HOME}/sbin/rabbitmqctl add_user ${RABBITMQ_DEFAULT_USER} ${RABBITMQ_DEFAULT_PASS}
+            ${RABBITMQ_HOME}/sbin/rabbitmqctl set_user_tags ${RABBITMQ_DEFAULT_USER} administrator
+            ${RABBITMQ_HOME}/sbin/rabbitmqctl set_permissions ${RABBITMQ_DEFAULT_USER} -p "/" ".*" ".*" ".*"
+            touch ${RABBITMQ_HOME}/.administrator_exist
+        fi
     fi
 fi
 
