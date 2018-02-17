@@ -5,6 +5,7 @@ This image provides RabbitMQ based on Alpine Linux latest stable version. All fi
 ### Supported tags and respective Dockerfile links ###
 
 - `latest` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/master/Dockerfile?fileviewer=file-view-default))
+- `3.7.0` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.7.0/Dockerfile?fileviewer=file-view-default))
 - `3.6.15` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.15/Dockerfile?fileviewer=file-view-default))
 - `3.6.14` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.14/Dockerfile?fileviewer=file-view-default))
 - `3.6.13` ([Dockerfile](https://bitbucket.org/bashell-com/alpine-rmq/src/3.6.13/Dockerfile?fileviewer=file-view-default))
