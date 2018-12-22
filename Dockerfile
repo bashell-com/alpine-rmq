@@ -1,7 +1,7 @@
 FROM quay.io/bashell/alpine-bash:latest
 MAINTAINER Chaiwat Suttipongsakul <cwt@bashell.com>
 
-ENV RABBITMQ_VERSION=3.7.3
+ENV RABBITMQ_VERSION=3.7.4
 ENV RABBITMQ_SRC=https://dl.bintray.com/rabbitmq/binaries/rabbitmq-server-generic-unix-$RABBITMQ_VERSION.tar.xz
 ENV RABBITMQ_HOME=/srv/rabbitmq_server-$RABBITMQ_VERSION
 ENV PLUGINS_DIR=$RABBITMQ_HOME/plugins
