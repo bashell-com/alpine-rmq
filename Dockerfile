@@ -1,4 +1,4 @@
-FROM bashell/alpine-bash:latest
+FROM quay.io/bashell/alpine-bash:latest
 MAINTAINER Chaiwat Suttipongsakul <cwt@bashell.com>
 
 ENV RABBITMQ_VERSION=3.6.14
